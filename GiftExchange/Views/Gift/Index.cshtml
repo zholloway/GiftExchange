@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GiftExchange.Models.Gift>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Gifts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GiftHint)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ColorWrappingPaper)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Depth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsOpened)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiftHint)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ColorWrappingPaper)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Depth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsOpened)
+        </td>
+        <td>
+            @Html.ActionLink("Update", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Open", "OpenGift", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "DeleteGift", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
