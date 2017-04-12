@@ -1,0 +1,18 @@
+﻿@model GiftExchange.Models.Gift
+
+@{
+    ViewBag.Title = "AreYouSure";
+}
+
+<h2>Please Confirm Your Choice</h2>
+@{ 
+    var id = Model.ID;
+}
+<p>Are you sure you want to open this gift</p>
+<form action="/Gift/OpenGift/@id" method="post">
+    <input type="radio" name="YesButton" /> Yes, open it! <br />
+    <input type="submit" value="Submit" />
+</form>
+<br />
+<p>Go back to <a href="/Gift/Index">Gifts List</a></p>
+    

@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>All Gifts</h2>
+<h2>All Unopened Gifts</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "CreateNew")
 </p>
 <table class="table">
     <tr>
@@ -25,9 +25,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Weight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsOpened)
         </th>
         <th></th>
     </tr>
@@ -50,11 +47,8 @@
             @Html.DisplayFor(modelItem => item.Weight)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsOpened)
-        </td>
-        <td>
-            @Html.ActionLink("Update", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Open", "OpenGift", new { id=item.ID }) |
+            @Html.ActionLink("Update", "UpdateGift", new { id=item.ID }) |
+            @Html.ActionLink("Open", "AreYouSure", new { id = item.ID }) |
             @Html.ActionLink("Delete", "DeleteGift", new { id=item.ID })
         </td>
     </tr>

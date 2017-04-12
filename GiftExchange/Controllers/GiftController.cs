@@ -26,5 +26,22 @@ namespace GiftExchange.Controllers
         {
             return View(GiftServices.OpenGift(id));
         }
+
+        public ActionResult AreYouSure(int id)
+        {
+            return View(GiftServices.GetOneGift(id));
+        }
+
+        //TODO: create new gift
+        public ActionResult CreateNew()
+        {
+            return View();
+        }
+
+        //TODO: update gift
+        public ActionResult UpdateGift(int id)
+        {
+            return View();
+        }
     }
 }

@@ -189,6 +189,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Gift\Index.cshtml" />
     <Content Include="Views\Gift\OpenGift.cshtml" />
+    <Content Include="Views\Gift\AreYouSure.cshtml" />
+    <Content Include="Views\Gift\UpdateGift.cshtml" />
+    <Content Include="Views\Gift\CreateNew.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
