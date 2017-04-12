@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.Contents)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.GiftHint)
         </th>
         <th>
@@ -31,6 +34,18 @@
 
 @foreach (var item in Model) {
     <tr>
+        @if (item.IsOpened == false)
+        {
+            <td>
+                <span>---IS NOT OPENED---</span>
+            </td>
+        }
+        else if (item.IsOpened == true)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.Contents)
+            </td>
+        }
         <td>
             @Html.DisplayFor(modelItem => item.GiftHint)
         </td>

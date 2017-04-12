@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using GiftExchange.Models;
 using System.Data.SqlClient;
+using System.Web.Mvc;
 
 namespace GiftExchange.Services
 {
@@ -17,7 +18,7 @@ namespace GiftExchange.Services
 
             using (var connection = new SqlConnection(PathToGiftDatabase))
             {
-                var query = "SELECT * FROM Gifts WHERE IsOpened='False'";
+                var query = "SELECT * FROM Gifts";
                 var cmd = new SqlCommand(query, connection);
                 connection.Open();
                 var reader = cmd.ExecuteReader();
@@ -82,9 +83,56 @@ namespace GiftExchange.Services
             return GetOneGift(giftID);
         }
 
-        public static void EditGift()
+        public static void EditGift(int id, FormCollection collection)
         {
+            using (var connection = new SqlConnection(PathToGiftDatabase))
+            {
+                var query = "UPDATE Gifts " +
+                            "SET [Contents] = @Contents," +
+                            "[GiftHint] = @GiftHint," +
+                            "[ColorWrappingPaper] = @ColorWrappingPaper," +
+                            "[Height] = @Height," +
+                            "[Depth] = @Depth," +
+                            "[Weight] = @Weight," +
+                            "[IsOpened] = @IsOpened " +
+                            "WHERE ID = @ID";
 
+                var cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@Contents", collection["Contents"]);
+                cmd.Parameters.AddWithValue("@GiftHint", collection["GiftHint"]);
+                cmd.Parameters.AddWithValue("@ColorWrappingPaper", collection["ColorWrappingPaper"]);
+                cmd.Parameters.AddWithValue("@Height", collection["Height"]);
+                cmd.Parameters.AddWithValue("@Depth", collection["Depth"]);
+                cmd.Parameters.AddWithValue("@Weight", collection["Weight"]);
+                cmd.Parameters.AddWithValue("@IsOpened", collection["IsOpened"]);
+                cmd.Parameters.AddWithValue("@ID", collection["ID"]);
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public static void CreateGift(FormCollection collection)
+        {
+            using (var connection = new SqlConnection(PathToGiftDatabase))
+            {
+                var query = "INSERT INTO Gifts (Contents, GiftHint, ColorWrappingPaper, Height, Depth, Weight, IsOpened) "
+                            + "Values (@Contents, @GiftHint, @ColorWrappingPaper, @Height, @Depth, @Weight, @IsOpened)";
+
+                var cmd = new SqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@Contents", collection["Contents"]);
+                cmd.Parameters.AddWithValue("@GiftHint", collection["GiftHint"]);
+                cmd.Parameters.AddWithValue("@ColorWrappingPaper", collection["ColorWrappingPaper"]);
+                cmd.Parameters.AddWithValue("@Height", collection["Height"]);
+                cmd.Parameters.AddWithValue("@Depth", collection["Depth"]);
+                cmd.Parameters.AddWithValue("@Weight", collection["Weight"]);
+                cmd.Parameters.AddWithValue("@IsOpened", collection["IsOpened"]);
+
+                connection.Open();
+                cmd.ExecuteNonQuery();
+                connection.Close();
+            }   
         }
     }
 }

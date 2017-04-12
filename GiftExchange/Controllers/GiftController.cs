@@ -33,15 +33,31 @@ namespace GiftExchange.Controllers
         }
 
         //TODO: create new gift
+        [HttpGet]
         public ActionResult CreateNew()
         {
             return View();
         }
 
-        //TODO: update gift
+        [HttpPost]
+        public ActionResult CreateNew(FormCollection collection)
+        {
+            GiftServices.CreateGift(collection);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public ActionResult UpdateGift(int id)
         {
-            return View();
+            return View(GiftServices.GetOneGift(id));
         }
+
+        [HttpPost]
+        public ActionResult UpdateGift(int id, FormCollection collection)
+        {
+            GiftServices.EditGift(id, collection);
+            return RedirectToAction("Index");
+        }
+
     }
 }
